@@ -36,7 +36,7 @@ dict_mania = {'Ablutomania': 'compulsion to wash oneself',
 'Countermania': 'compulsion to experience fear-inducing situations',
 'Dacnomania': 'obsession with killing',
 'Demonomania': 'belief that someone is possessed by demons',
-'Dermatillomania': 'compulsion to pick at one's own skin',
+'Dermatillomania': 'compulsion to pick at one\'s own skin',
 'Dikemania': 'obsession with seeing justice',
 'Dipsumnia': 'abnormal desire for alcohol',
 'Doramania': 'obsession with owning furs',
@@ -99,12 +99,12 @@ dict_mania = {'Ablutomania': 'compulsion to wash oneself',
 'Theomania': 'belief that he or she is a god',
 'Titillomaniac': 'compulsion to scratch oneself',
 'Tomomania': 'irrational predilection for performing surgeries',
-'Trichotillomania': 'desire to pull one's own hair',
+'Trichotillomania': 'desire to pull one\'s own hair',
 'Typhlomania': 'pathological blindness',
 'Xenomania': 'obsession with foreign things',
 'Zoomania': 'insane affection for animals.'}
 
-dict_phobia = {
+dict_fobia = {
 'Ablutophobia': 'Fear of washing or bathing.',
 'Acrophobia': 'Fear of heights.',
 'Aerophobia': 'Fear of flying.',
@@ -235,7 +235,7 @@ weapons = {'melee': {
 }
 
 
-dicti_name = {'Man': 
+dicti_names = {'Man':
 ['GEORGE CARVALHO',
 'MANUEL RAMOS',
 'BERNARDO AGUIAR',
@@ -358,7 +358,7 @@ def create_open_file(name, status, weapon_melee, melee_characteristics, skill_kn
 
         # Displays the NPCs present in the CSV file
         npcs = pd.read_csv(arquive, sep=SEPARADOR, on_bad_lines='skip')
-        print("\nFicheiro de NPCs encontrado, estes são os NPCs:")
+        print("\n NPC file found, these are the NPC\'s:")
         print(npcs)
             
         choice = input('Do you wish to continue?\n\t1 : Create a random NPC\n\t2 : Return to home menu\n\t3 : Exit\n')
@@ -418,11 +418,11 @@ def roll_dice(n_dice, sides, show=False):
     for i in range(n_dice):
         result = random.randint(1, sides)
         if show == True:
-            print(f"Lançamento {i+1} - Result : {result}")
+            print(f"Roll {i+1} - Result : {result}")
         sum += result
     
     if show == True:
-        print('Valor dos dados:', sum)
+        print('Dice Result:', sum)
         choice = input('Do you wish to continue?\n\t1 : Reroll the dice\n\t2 : Return to home menu\n\t3 : Exit\n')
         if int(choice) == 1:
             show = True
@@ -450,7 +450,7 @@ def phobias_choose():
 def mania_choose():
     mania = random.choice(list(dict_mania.keys()))
     print(mania, '-->', dict_mania[mania])
-    choice = input('Do you wish to continue?\n\t1 : Make new craze\n\t2 : Return to home menu\n\t3 : Exit\n')
+    choice = input('Do you wish to continue?\n\t1 : Make new mania\n\t2 : Return to home menu\n\t3 : Exit\n')
     if int(choice) == 1:
         mania_choose()
     elif int(choice) == 2:
@@ -511,15 +511,15 @@ def gerar_stats(number):
             "DB"        :DB
         }
     else:
-        STR = int(input('Força/STR:\n')) 
-        CON = int(input('Constituição/CON:\n'))
-        SIZ = int(input('Tamanho/SIZ:\n') )
-        DEX = int(input('Destreza/DEX:\n')) 
-        APP = int(input('Aparencia/APP:\n')) 
-        EDU = int(input('Educação/EDU:\n'))  
-        INT = int(input('Inteligencia/INT:\n')) 
-        POW = int(input('Poder/POW:\n'))
-        HP  = int(input('Vida/HP:\n'))
+        STR = int(input('STR:\n')) 
+        CON = int(input('CON:\n'))
+        SIZ = int(input('SIZ:\n') )
+        DEX = int(input('DEX:\n')) 
+        APP = int(input('APP:\n')) 
+        EDU = int(input('EDU:\n'))  
+        INT = int(input('INT:\n')) 
+        POW = int(input('POW:\n'))
+        HP  = int(input('HP:\n'))
         SAN = POW
 
         if STR + SIZ >= 2 and STR + SIZ  <= 64:
@@ -566,8 +566,8 @@ def gerar_stats(number):
 def npc_criation(number):
     if number == 0:
         try:    
-            weapon_melee = random.choice(list(guns['melee'].keys()))            
-            weapon_firearms = random.choice(list(guns['firearms'].keys()))
+            weapon_melee = random.choice(list(weapons['melee'].keys()))
+            weapon_firearms = random.choice(list(weapons['firearms'].keys()))
             gender = input('\t1 : Man\n\t2 : Woman\n\t3 : Exit\n')
             if int(gender) == 1:
                 name = random.choice(dicti_names['Man'])
@@ -578,18 +578,19 @@ def npc_criation(number):
             
             stats = gerar_stats(0)
             skill_gun, skill_knife = values_skill()
-            create_open_file(name, stats, weapon_melee, guns['melee'][weapon_melee],skill_knife,weapon_firearms, guns['firearms'][weapon_firearms],skill_gun)
+            create_open_file(name, stats, weapon_melee, weapons['melee'][weapon_melee],skill_knife, weapon_firearms, weapons['firearms'][weapon_firearms],skill_gun)
             
-        except:
+        except Exception as e:
             print('The value entered does not exist. Try again.')
+            print(e)
             npc_criation(0)
     elif number == 1:
-        weapon_melee = random.choice(list(guns['melee'].keys()))
-        weapon_firearms = random.choice(list(guns['firearms'].keys()))
+        weapon_melee = random.choice(list(weapons['melee'].keys()))
+        weapon_firearms = random.choice(list(weapons['firearms'].keys()))
         name = str(input('name:\n'))
         stats = gerar_stats(1)
         skill_gun, skill_knife = values_skill()
-        create_open_file(name, stats, weapon_melee, guns['melee'][weapon_melee],skill_knife,weapon_firearms, guns['firearms'][weapon_firearms],skill_gun)
+        create_open_file(name, stats, weapon_melee, weapons['melee'][weapon_melee],skill_knife,weapon_firearms, weapons['firearms'][weapon_firearms],skill_gun)
         
 def values_skill():
     firearms_gun = random.randint(25,66)
@@ -600,7 +601,7 @@ def values_skill():
 
 def choices():
     try:
-        choice = int(input('What do you want to do?\n\t1 : Choose a phobia.\n\t2 : Choose a mania.\n\t3 : Create a random NPC.\n\t4 : Roll the dices\n\t5 : Dice number division\n\t6 : Add a NPC manualy\n\t7 : Open que CSV file with all NPC's\n\t8 : Exit\n'))
+        choice = int(input('What do you want to do?\n\t1 : Choose a phobia.\n\t2 : Choose a mania.\n\t3 : Create a random NPC.\n\t4 : Roll the dices\n\t5 : Dice number division\n\t6 : Add a NPC manualy\n\t7 : Open que CSV file with all NPC\'s\n\t8 : Exit\n'))
         if choice == 1 :
             phobias_choose()
         elif choice == 2 :
@@ -628,7 +629,7 @@ def choices():
         choices()
 
 def division():
-    number = int(input('Colocar numero:\n'))
+    number = int(input('Insert Number:\n'))
     print('1\t:\t',number,'\n1/2\t:\t' , int(number/2), '\n1/5\t:\t', int(number/5))
     choice = input('Do you wish to continue?\n\t1 : Make new division\n\t2 : Return to home menu\n\t3 : Exit\n')
     if int(choice) == 1:
