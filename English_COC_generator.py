@@ -104,7 +104,7 @@ dict_mania = {'Ablutomania': 'compulsion to wash oneself',
 'Xenomania': 'obsession with foreign things',
 'Zoomania': 'insane affection for animals.'}
 
-dict_fobia = {
+dict_phobia = {
 'Ablutophobia': 'Fear of washing or bathing.',
 'Acrophobia': 'Fear of heights.',
 'Aerophobia': 'Fear of flying.',
