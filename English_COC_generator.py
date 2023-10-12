@@ -24,7 +24,7 @@ dict_mania = {'Ablutomania': 'compulsion to wash oneself',
 'Bibliomania': 'obsession with books and/or reading',
 'Bruxomania': 'compulsion to grind teeth',
 'Cacodemomania': 'belief that someone is inhabited by an evil spirit',
-'Callomania': 'obsession with one's own beauty',
+'Callomania': 'obsession with one\'s own beauty',
 'Cartacoethes': 'uncontrollable compulsion to always look at maps',
 'Catapedamania': 'obsession with jumping from high places',
 'Cheimatomania': 'abnormal desire for cold and/or cold things',
@@ -38,7 +38,7 @@ dict_mania = {'Ablutomania': 'compulsion to wash oneself',
 'Demonomania': 'belief that someone is possessed by demons',
 'Dermatillomania': 'compulsion to pick at one's own skin',
 'Dikemania': 'obsession with seeing justice',
-'Dipsomania': 'abnormal desire for alcohol',
+'Dipsumnia': 'abnormal desire for alcohol',
 'Doramania': 'obsession with owning furs',
 'Doromania': 'obsession with giving gifts',
 'Drapetomania': 'compulsion to flee',
@@ -71,15 +71,15 @@ dict_mania = {'Ablutomania': 'compulsion to wash oneself',
 'Megalithomania': 'abnormal tendency to compose bizarre ideas when in the presence of stone circles/standing stones',
 'Melomania': 'obsession with music or a specific melody',
 'Metromania': 'insatiable desire to write verses',
-'Misomania': 'hatred of everything, obsession with hating a subject or group',
+'Misumnia': 'hatred of everything, obsession with hating a subject or group',
 'Monomania': 'abnormal obsession with a single thought or idea',
 'Mythomania': 'abnormal lying or exaggeration',
-'Nosomania': 'illusion of suffering from an imaginary illness',
+'Nosumnia': 'illusion of suffering from an imaginary illness',
 'Notomania': 'compulsion to record everything (e.g., photography)',
 'Onomamania': 'obsession with names (people, places, things)',
 'Onomatomania': 'irresistible urge to repeat certain words',
 'Onychotillomania': 'compulsive nail-biting',
-'Opsomania': 'abnormal love for a specific type of food',
+'Opsumnia': 'abnormal love for a specific type of food',
 'Paramania': 'abnormal pleasure in complaining',
 'Personamania': 'obsession with wearing masks',
 'Phasmomania': 'obsession with ghosts',
@@ -178,7 +178,7 @@ dict_fobia = {
 'Parasitophobia': 'Fear of parasites.',
 'Pediophobia': 'Fear of dolls.',
 'Phagophobia': 'Fear of swallowing, eating, or being eaten.',
-'Pharmacophobia': 'Fear of drugs.',
+'PhGuncophobia': 'Fear of drugs.',
 'Phasmophobia': 'Fear of ghosts.',
 'Phenogophobia': 'Fear of daylight.',
 'Pogonophobia': 'Fear of beards.',
@@ -280,7 +280,7 @@ dicti_name = {'Man':
 'MATEUS RAMOS',
 'ANGELO GOUVEIA',
 'DIONISIO ALCANTRA',
-'ARMANDO SILVESTRE',
+'GunNDO SILVESTRE',
 'TEOFILO COSTA',
 'ELIAS VENÂNCIO',
 'RAUL ALBUQUERQUE',
@@ -338,28 +338,26 @@ dicti_name = {'Man':
 
 #https://thestoryshack.com/pt/geradores/gerador-de-nomes-portugueses/?v=1
 
-arquivo = "npcs.csv"
+arquive = "npcs.csv"
 SEPARADOR = ","
 
-def create_open_file(name, status, weapon_melee, caracteristicas_arma_branca, skill_knife, weapon_firearms,caracteristicas_arma_fogo,skill_gun):
-    #SEPARADOR = SEPARADOR
-    #arquivo = "npcs.csv"
+def create_open_file(name, status, weapon_melee, melee_characteristics, skill_knife, weapon_firearms,firearm_characteristics,skill_gun):
     try:       
-        pd.read_csv(arquivo) # Checker, ve se existe ficheiro      
-        # Formatação dos dados em colunas
+        pd.read_csv(arquive) # Checker, see if there is a file      
+        # Formatting data into columns
         row_data = [name, status['AGE'], status['HP'], status['SAN'], status['STR'], status['CON'], status['SIZ'],
             status['DEX'], status['APP'], status['EDU'], status['INT'], status['POW'], status['MOV'],status['DB'],
-            weapon_melee, skill_knife, caracteristicas_arma_branca[0], caracteristicas_arma_branca[1], weapon_firearms, 
-            skill_gun, caracteristicas_arma_fogo[0], caracteristicas_arma_fogo[1], caracteristicas_arma_fogo[2], 
-            caracteristicas_arma_fogo[3]]
+            weapon_melee, skill_knife, melee_characteristics[0], melee_characteristics[1], weapon_firearms, 
+            skill_gun, firearm_characteristics[0], firearm_characteristics[1], firearm_characteristics[2], 
+            firearm_characteristics[3]]
 
-        # Escreve os dados no arquivo CSV
-        with open(arquivo, 'a+', encoding='utf-8') as fh:
+        # Write data to CSV file
+        with open(arquive, 'a+', encoding='utf-8') as fh:
             fh.write(",".join(map(str, row_data)) + "\n")
             print('g')  
 
-        # Exibe os NPCs presentes no arquivo CSV
-        npcs = pd.read_csv(arquivo, sep=SEPARADOR, on_bad_lines='skip')
+        # Displays the NPCs present in the CSV file
+        npcs = pd.read_csv(arquive, sep=SEPARADOR, on_bad_lines='skip')
         print("\nFicheiro de NPCs encontrado, estes são os NPCs:")
         print(npcs)
             
@@ -371,22 +369,21 @@ def create_open_file(name, status, weapon_melee, caracteristicas_arma_branca, sk
         else:
             exit
     except FileNotFoundError:
-        print("Ficheiro nao encontrado, a criar um de raiz...")
-        with open(arquivo, 'w', encoding='utf-8') as fh:
-            fh.write("name,AGE,HP,SAN,STR,CON,SIZ,DEX,APP,EDU,INT,POW,MOV,DB,Arma melee,Habilidade Arma melee,Dano,Distancia,Arma firearms,Habilidade Arma firearms,Dano,Distancia,N_Balas,Defeito\n")
+        print("File not found, creating one from scratch...")
+        with open(arquive, 'w', encoding='utf-8') as fh:
+            fh.write("name,AGE,HP,SAN,STR,CON,SIZ,DEX,APP,EDU,INT,POW,MOV,DB,Gun melee,Ability Gun melee,Damage,Distance,Gun firearms,Ability Gun firearms,Damage,Distance,N_Bullets,Malfunction\n")
 
         row_data = [name, status['AGE'], status['HP'], status['SAN'], status['STR'], status['CON'], status['SIZ'],
             status['DEX'], status['APP'], status['EDU'], status['INT'], status['POW'], status['MOV'],status['DB'],
-            weapon_melee, skill_knife, caracteristicas_arma_branca[0], caracteristicas_arma_branca[1], weapon_firearms, skill_gun, caracteristicas_arma_fogo[0], caracteristicas_arma_fogo[1],
-            caracteristicas_arma_fogo[2], caracteristicas_arma_fogo[3]]
-        print('j') 
-        # Escreve os dados no arquivo CSV
-        with open(arquivo, 'a+', encoding='utf-8') as fh:
+            weapon_melee, skill_knife, melee_characteristics[0], melee_characteristics[1], weapon_firearms, skill_gun, firearm_characteristics[0], firearm_characteristics[1],
+            firearm_characteristics[2], firearm_characteristics[3]]
+        # Write data to CSV file
+        with open(arquive, 'a+', encoding='utf-8') as fh:
             fh.write(",".join(map(str, row_data)) + "\n")
 
-        # Exibe os NPCs presentes no arquivo CSV
-        npcs = pd.read_csv(arquivo, sep=SEPARADOR, on_bad_lines='skip')
-        print("\nFicheiro de NPCs encontrado, estes são os NPCs:")
+        # Displays the NPCs present in the CSV file
+        npcs = pd.read_csv(arquive, sep=SEPARADOR, on_bad_lines='skip')
+        print("\nNPC file found, these are the NPCs:")
         print(npcs)
             
         choice = input('Do you wish to continue?\n\t1 : Create a random NPC\n\t2 : Return to home menu\n\t3 : Exit\n')
@@ -399,10 +396,10 @@ def create_open_file(name, status, weapon_melee, caracteristicas_arma_branca, sk
 
 def visualize_file():
     try:
-        # Carrega os dados do arquivo CSV em um DataFrame
-        df = pd.read_csv(arquivo, sep=SEPARADOR)
+        # Load data from the CSV file into a DataFrame
+        df = pd.read_csv(arquive, sep=SEPARADOR)
 
-        # Exibe o DataFrame completo sem truncar as linhas
+        # Display the complete DataFrame without truncating rows
         with pd.option_context('display.max_rows', None, 'display.max_columns', None):
             print(df)
 
@@ -413,36 +410,36 @@ def visualize_file():
             exit
             
     except FileNotFoundError:
-        print(f"O arquivo '{arquivo}' não foi encontrado.")
+        print(f"Arquive '{arquive}' not found.")
         choices()
 
-def lancar_dados(n_dice, lados, show=False):
-    soma = 0 
+def roll_dice(n_dice, sides, show=False):
+    sum = 0 
     for i in range(n_dice):
-        resultado = random.randint(1, lados)
+        result = random.randint(1, sides)
         if show == True:
-            print(f"Lançamento {i+1} - Resultado : {resultado}")
-        soma += resultado
+            print(f"Lançamento {i+1} - Result : {result}")
+        sum += result
     
     if show == True:
-        print('Valor dos dados:', soma)
-        choice = input('Do you wish to continue?\n\t1 : Lançar novamente os dados\n\t2 : Return to home menu\n\t3 : Exit\n')
+        print('Valor dos dados:', sum)
+        choice = input('Do you wish to continue?\n\t1 : Reroll the dice\n\t2 : Return to home menu\n\t3 : Exit\n')
         if int(choice) == 1:
             show = True
             n_dice = int(input("How many dice do you want to roll? "))
             n_sides = int(input("How many sides? "))
-            lancar_dados(n_dice, n_sides, show)
+            roll_dice(n_dice, n_sides, show)
         elif int(choice) == 2:
             choices()
         else:
             exit
     
-    return soma
+    return sum
 
 def phobias_choose():
     phobia = random.choice(list(dict_fobia.keys()))
     print(phobia, '-->', dict_fobia[phobia])
-    choice = input('Do you wish to continue?\n\t1 : Fazer nova phobia\n\t2 : Return to home menu\n\t3 : Exit\n')
+    choice = input('Do you wish to continue?\n\t1 : Make new phobia\n\t2 : Return to home menu\n\t3 : Exit\n')
     if int(choice) == 1:
         phobias_choose()
     elif int(choice) == 2:
@@ -453,7 +450,7 @@ def phobias_choose():
 def mania_choose():
     mania = random.choice(list(dict_mania.keys()))
     print(mania, '-->', dict_mania[mania])
-    choice = input('Do you wish to continue?\n\t1 : Fazer nova mania\n\t2 : Return to home menu\n\t3 : Exit\n')
+    choice = input('Do you wish to continue?\n\t1 : Make new craze\n\t2 : Return to home menu\n\t3 : Exit\n')
     if int(choice) == 1:
         mania_choose()
     elif int(choice) == 2:
@@ -463,15 +460,15 @@ def mania_choose():
 
 def gerar_stats(number):
     if number == 0:
-        STR = int(lancar_dados(3,6) * 5) # Força
-        CON = int(lancar_dados(3,6) * 5) # Constituição
-        SIZ = int((lancar_dados(2,6) + 6) * 5) # Tamanho
-        DEX = int(lancar_dados(3,6) * 5) # Destreza
-        APP = int(lancar_dados(3,6) * 5) # Aparência
-        EDU = int((lancar_dados(2,6) + 6) * 5) # Educação 
-        INT = int((lancar_dados(2,6) + 6) * 5) # Inteligência
-        POW = int(lancar_dados(3,6) * 5) # Poder
-        HP  = int(((CON + SIZ)/10)+lancar_dados(1,4))
+        STR = int(roll_dice(3,6) * 5) 
+        CON = int(roll_dice(3,6) * 5) 
+        SIZ = int((roll_dice(2,6) + 6) * 5)
+        DEX = int(roll_dice(3,6) * 5) 
+        APP = int(roll_dice(3,6) * 5) 
+        EDU = int((roll_dice(2,6) + 6) * 5)
+        INT = int((roll_dice(2,6) + 6) * 5)
+        POW = int(roll_dice(3,6) * 5) 
+        HP  = int(((CON + SIZ)/10)+roll_dice(1,4))
         SAN = POW
 
         if STR + SIZ >= 2 and STR + SIZ  <= 64:
@@ -603,25 +600,25 @@ def values_skill():
 
 def choices():
     try:
-        escolha = int(input('What do you want to do?\n\t1 : Choose a phobia.\n\t2 : Choose a mania.\n\t3 : Create a random NPC.\n\t4 : Roll the dices\n\t5 : Dice number division\n\t6 : Add a NPC manualy\n\t7 : Open que CSV file with all NPC's\n\t8 : Exit\n'))
-        if escolha == 1 :
+        choice = int(input('What do you want to do?\n\t1 : Choose a phobia.\n\t2 : Choose a mania.\n\t3 : Create a random NPC.\n\t4 : Roll the dices\n\t5 : Dice number division\n\t6 : Add a NPC manualy\n\t7 : Open que CSV file with all NPC's\n\t8 : Exit\n'))
+        if choice == 1 :
             phobias_choose()
-        elif escolha == 2 :
+        elif choice == 2 :
             mania_choose()
-        elif escolha == 3 :
+        elif choice == 3 :
             npc_criation(0)
-        elif escolha == 4 :
+        elif choice == 4 :
             show = True
             n_dice = int(input("How many dice do you want to roll? "))
             n_sides = int(input("How many sides? "))
-            lancar_dados(n_dice, n_sides, show)
-        elif escolha == 5 :
+            roll_dice(n_dice, n_sides, show)
+        elif choice == 5 :
             division()
-        elif escolha == 6 :
+        elif choice == 6 :
             npc_criation(1)
-        elif escolha == 7 :
+        elif choice == 7 :
             visualize_file()
-        elif escolha == 8 :
+        elif choice == 8 :
             exit
         else:
             print('Erro')
